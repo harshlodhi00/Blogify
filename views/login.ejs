@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Login</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container m-4">
+      <form method="Post" action="/login">
+        <div class="mb-3">
+          <label for="userEnteredEmail" class="form-label">Email address</label>
+          <input
+            name="userEnteredEmail"
+            type="email"
+            class="form-control"
+            id="userEnteredEmail"
+            aria-describedby="emailHelp"
+          />
+          <div id="userEnteredEmail" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="userEnteredPassword" class="form-label">Password</label>
+          <input
+            name="userEnteredPassword"
+            type="password"
+            class="form-control"
+            id="userEnteredPassword"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <%- include('./partials/scripts') %>
+  </body>
+</html>

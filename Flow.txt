@@ -1,0 +1,26 @@
+--> First in Index.js Setup Express then start server using app.listen
+--> Then set up View engine and views folder path.
+--> Then set up views make a small home page setup partials.
+--> Then in index index.js set up a route to render home page.
+
+
+
+
+
+
+
+
+
+
+---------------Git Hub Notes-------------------
+
+First git init
+then make a repososity on github
+copy link of like this : " git remote add origin https://github.com/harshlodhi00/Blogify.git"
+that is git remote add origin command 
+
+then git add . 
+then git commit -m "message"
+then git push -u origin master
+
+then check git status
