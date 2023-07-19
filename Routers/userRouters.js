@@ -1,12 +1,12 @@
 const express = require("express");
-const UserDetail = require('../models/userdetailModel')
+const UserDetail = require("../models/userdetailModel");
 
 const router = express.Router();
 
 // --------------- GET Routes ----------------
 
 router.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", {user: req.user});
 });
 
 router.get("/login", (req, res) => {
@@ -19,14 +19,19 @@ router.get("/signup", (req, res) => {
 
 // --------------- Post Routes ----------------
 
-router.post("/login", (req, res) => {
-  const { userEnteredEmail, userEnteredPassword } = req.body;
-  // console.log(userEnteredEmail, userEnteredPassword)
-
-
-
-  
-  res.redirect('/')
+router.post("/login", async (req, res) => {
+  const { userEmail, userPassword } = req.body;
+  const token = await UserDetail.matchPasswordAndCreateToken(
+    userEmail,
+    userPassword
+  );
+  if (!token) {
+    console.log("login failed");
+    res.redirect("/signup");
+  } else {
+    console.log(token, "login succesful");
+    res.cookie("token", token).redirect("/");
+  }
 });
 
 router.post("/signup", async (req, res) => {
@@ -34,10 +39,9 @@ router.post("/signup", async (req, res) => {
   await UserDetail.create({
     userFullName,
     userEmail,
-    userPassword
-  })
-  res.redirect('/login');
-
+    userPassword,
+  });
+  res.redirect("/login");
 });
 
 module.exports = router;
