@@ -1,14 +1,15 @@
 const express = require("express");
 const path = require("path");
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
+const checkForAuthenticationCookie = require("./middlewares/cookieAuthentication");
 
 const app = express();
 
 const router = require("./Routers/userRouters");
 const connectDB = require("./connection");
-const checkForAuthenticationCookie = require("./middlewares/cookieAuthentication");
 
-const PORT = 8000;
+
+const PORT = 3000;
 
 connectDB('mongodb://localhost:27017/blogify');
 

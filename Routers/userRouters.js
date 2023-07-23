@@ -6,7 +6,7 @@ const router = express.Router();
 // --------------- GET Routes ----------------
 
 router.get("/", (req, res) => {
-  res.render("home", {user: req.user});
+  res.render("home", { user: req.user });
 });
 
 router.get("/login", (req, res) => {
@@ -21,16 +21,16 @@ router.get("/signup", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { userEmail, userPassword } = req.body;
-  const token = await UserDetail.matchPasswordAndCreateToken(
-    userEmail,
-    userPassword
-  );
-  if (!token) {
-    console.log("login failed");
-    res.redirect("/signup");
-  } else {
-    console.log(token, "login succesful");
-    res.cookie("token", token).redirect("/");
+  try {
+    const token = await UserDetail.matchPasswordAndCreateToken(
+      userEmail,
+      userPassword
+    );
+    // console.log("login Success");
+    return res.cookie("token", token).redirect("/");
+  } catch (error) {
+    // console.log("login failed");
+    return res.render("login");
   }
 });
 
