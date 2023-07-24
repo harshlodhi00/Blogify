@@ -21,30 +21,39 @@ router.get("/signup", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { userEmail, userPassword } = req.body;
+
   try {
     const token = await UserDetail.matchPasswordAndCreateToken(
       userEmail,
       userPassword
     );
-    // console.log("login Success");
+
+    // Login successful, set the token in the cookie and redirect to the home page
     return res.cookie("token", token).redirect("/");
   } catch (error) {
-    // console.log("login failed");
-    return res.render("login");
+    // Handle login errors and pass the error message to the template
+    return res.render("login", { error: error.message });
   }
 });
 
 router.post("/signup", async (req, res) => {
   const { userFullName, userEmail, userPassword } = req.body;
-  await UserDetail.create({
-    userFullName,
-    userEmail,
-    userPassword,
-  });
-  return res.redirect("/login");
+
+  try {
+    const existingUser = await UserDetail.findOne({ userEmail });
+    if (existingUser) {
+      return res.render("signup", { error: "Email already registered!" });
+    }
+    await UserDetail.create({
+      userFullName,
+      userEmail,
+      userPassword,
+    });
+    return res.redirect("/login");
+  } catch (error) {
+    console.error(error);
+    return res.render("signup", { error: "An error occurred during signup!" });
+  }
 });
 
 module.exports = router;
-
-
-

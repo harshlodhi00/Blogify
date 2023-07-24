@@ -24,3 +24,11 @@ then git commit -m "message"
 then git push -u origin master
 
 then check git status
+
+
+
+
+middlewares
+
+If we use app.use("Middleware") in index.js file and then it will use globally and run om every get and post route .
+If we want to use middleware to certain route only then we have define within the route that is route.get("/", middleware, (req,res) => {}) in this way we can use this middleware to only that route
