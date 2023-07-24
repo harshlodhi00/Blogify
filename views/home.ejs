@@ -5,8 +5,10 @@
     <title>Home</title>
   </head>
   <body>
-    <%- include('./partials/nav') %>
-    <%= user %>
-    <%- include('./partials/scripts') %>
+    <%- include('./partials/nav') %> <% if (locals.user) { %>
+    <h1>Hello <%= user.userFullName %></h1>
+    <% } else { %>
+    <p>Hey Master</p>
+    <% } %> <%- include('./partials/scripts') %>
   </body>
 </html>

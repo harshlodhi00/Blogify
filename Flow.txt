@@ -32,3 +32,22 @@ middlewares
 
 If we use app.use("Middleware") in index.js file and then it will use globally and run om every get and post route .
 If we want to use middleware to certain route only then we have define within the route that is route.get("/", middleware, (req,res) => {}) in this way we can use this middleware to only that route
+
+
+
+
+Error Handling 
+
+Use try and catch 
+
+and in catch throw new Error("Error")
+
+then to catch that error 
+
+
+res.locals.error
+
+res.render("signup", { error: "An error occurred during signup!" }
+
+
+{ user: req.user }

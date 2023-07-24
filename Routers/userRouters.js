@@ -28,11 +28,10 @@ router.post("/login", async (req, res) => {
       userPassword
     );
 
-    // Login successful, set the token in the cookie and redirect to the home page
     return res.cookie("token", token).redirect("/");
   } catch (error) {
-    // Handle login errors and pass the error message to the template
-    return res.render("login", { error: error.message });
+    res.locals.error = error.message;
+    return res.render("login");
   }
 });
 
@@ -42,7 +41,8 @@ router.post("/signup", async (req, res) => {
   try {
     const existingUser = await UserDetail.findOne({ userEmail });
     if (existingUser) {
-      return res.render("signup", { error: "Email already registered!" });
+      res.locals.error = "Email already registered!";
+      return res.render("signup");
     }
     await UserDetail.create({
       userFullName,
@@ -52,7 +52,8 @@ router.post("/signup", async (req, res) => {
     return res.redirect("/login");
   } catch (error) {
     console.error(error);
-    return res.render("signup", { error: "An error occurred during signup!" });
+    res.locals.error = "An error occurred during signup!";
+    return res.render("signup");
   }
 });
 
