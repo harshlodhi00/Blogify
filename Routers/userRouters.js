@@ -6,15 +6,15 @@ const router = express.Router();
 // --------------- GET Routes ----------------
 
 router.get("/", (req, res) => {
-  res.render("home", { user: req.user });
+  return res.render("home", { user: req.user });
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  return res.render("login");
 });
 
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  return res.render("signup");
 });
 
 // --------------- Post Routes ----------------
@@ -41,7 +41,10 @@ router.post("/signup", async (req, res) => {
     userEmail,
     userPassword,
   });
-  res.redirect("/login");
+  return res.redirect("/login");
 });
 
 module.exports = router;
+
+
+

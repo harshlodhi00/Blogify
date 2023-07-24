@@ -40,7 +40,7 @@ userDetailSchema.pre("save", function (next) {
     .digest("hex");
   this.userPassword = hashedPassword;
   this.salt = salt;
-  next();
+  next(); 
 });
 
 userDetailSchema.static(

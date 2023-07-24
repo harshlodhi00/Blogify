@@ -9,7 +9,7 @@ const router = require("./Routers/userRouters");
 const connectDB = require("./connection");
 
 
-const PORT = 3000;
+const PORT = 3001;
 
 connectDB('mongodb://localhost:27017/blogify');
 
@@ -17,8 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"))
-
-// app.use(express.)
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));

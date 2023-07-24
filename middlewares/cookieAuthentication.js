@@ -5,14 +5,14 @@ function checkForAuthenticationCookie(cookieName) {
     const tokenCookieValue = req.cookies[cookieName];
 
     if (!tokenCookieValue) {
-      next();
+      return next();
     }
     try {
       const userPayload = validateToken(tokenCookieValue);
       console.log(userPayload);
       req.user = userPayload;
     } catch (error) {}
-    next();
+    return next();
   };
 }
 
