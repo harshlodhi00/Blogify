@@ -2,20 +2,21 @@
 <html lang="en">
   <head>
     <%- include('./partials/head') %>
-    <title>Home</title>
+    <title>Trending Blog</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container m-8 mb-4 mt-4">
-      <% if (locals.user) { %>
-      <h1>Hello <%= user.userFullName %></h1>
-      <% } else { %>
-      <h1>Hey Master</h1>
-      <% } %>
+
+    <div class="container m-8 mt-4">
+      <div class="alert alert-success" role="alert">
+        " If Blog Have more than 70 likes it will we trending Blog "
+      </div>
     </div>
-    <div class="container m-8">
+
+    <div class="container m-8 mt-4">
       <% if (allBlogs && allBlogs.length > 0) { %> <% allBlogs.forEach((blog) =>
-      { %>
+      { %> <% if (blog.blogLikes > 70) { %>
+
       <div class="card mb-3">
         <div class="card-header">
           <h5 class="card-title"><%= blog.blogTitle %></h5>
@@ -25,8 +26,9 @@
           <p class="card-text"><%= blog.blogBody %></p>
         </div>
       </div>
-      <% }); %> <% } else { %>
-      <p>No blogs found.</p>
+
+      <% } %> <% }); %> <% } else { %>
+      <p>No Trending blogs rn.</p>
       <% } %>
     </div>
 

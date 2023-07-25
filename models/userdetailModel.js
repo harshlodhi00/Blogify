@@ -57,6 +57,7 @@ userDetailSchema.static(
 
     if (userEnteredHashedPassword === user.userPassword) {
       const token = createTokenForUser(user);
+      // console.log(user)
       return token;
     } else {
       throw new Error("Password Does Not Match");

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Add Blogs</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container m-4">
+      <form method="Post" action="/addBlog">
+        <div class="mb-3">
+          <label for="blogTitle" class="form-label">Blog Title</label>
+          <input
+            name="blogTitle"
+            type="text"
+            class="form-control"
+            id="blogTitle"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="blogBody" class="form-label"> Blog Body </label>
+          <textarea
+            name="blogBody"
+            type="text"
+            class="form-control"
+            id="blogBody"
+            rows="3"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Blog</button>
+      </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>

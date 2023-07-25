@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
 const checkForAuthenticationCookie = require("./middlewares/cookieAuthentication");
 
 const app = express();
@@ -8,15 +8,14 @@ const app = express();
 const router = require("./Routers/userRouters");
 const connectDB = require("./connection");
 
+const PORT = 8000;
 
-const PORT = 3001;
-
-connectDB('mongodb://localhost:27017/blogify');
+connectDB("mongodb://localhost:27017/blogify");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(checkForAuthenticationCookie("token"))
+app.use(checkForAuthenticationCookie("token"));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
