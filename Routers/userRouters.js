@@ -90,6 +90,11 @@ router.post("/addBlog", async (req, res) => {
   const { blogTitle, blogBody } = req.body;
   const userEmail = req.user.userEmail;
   const blogAuthor = req.user.userFullName;
+
+  if (blogTitle === "" || blogBody === "") {
+    res.locals.error = "You can't post empty Blog";
+    return res.render("addBlog");
+  }
   await blogs.create({
     blogTitle,
     blogBody,
